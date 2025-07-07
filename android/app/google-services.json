@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "367048939576",
+    "project_id": "meudindin-3dd5a",
+    "storage_bucket": "meudindin-3dd5a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367048939576:android:214e937f90e71656ff2ecd",
+        "android_client_info": {
+          "package_name": "com.example.meu_din_din"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRX1RvrStW92aahiHV_0VogpmW-1RblHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
