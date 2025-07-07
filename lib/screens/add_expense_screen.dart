@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/expense.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   const AddExpenseScreen({super.key});
@@ -23,15 +25,35 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     'Outros',
   ];
 
-  void _salvarDespesa() {
+  Future<void> _salvarDespesa() async {
     if (_formKey.currentState!.validate()) {
-      // Simula salvamento (futuramente vai pro banco)
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Despesa salva com sucesso!')),
-      );
-      Navigator.pop(context); // Volta pra Home
+      try {
+        final double valor = double.parse(_valorController.text.replaceAll(',', '.'));
+
+        final novaDespesa = Expense(
+          descricao: _descricaoController.text.trim(),
+          valor: valor,
+          categoria: _categoriaSelecionada,
+          data: _dataSelecionada,
+        );
+
+        await FirebaseFirestore.instance
+            .collection('despesas')
+            .add(novaDespesa.toMap());
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Despesa salva com sucesso!')),
+        );
+
+        Navigator.pop(context);
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao salvar: $e')),
+        );
+      }
     }
   }
+
 
   void _selecionarData() async {
     DateTime? novaData = await showDatePicker(
