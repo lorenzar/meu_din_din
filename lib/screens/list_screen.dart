@@ -15,6 +15,19 @@ class ListScreen extends StatelessWidget {
     });
   }
 
+  Future<void> _deletarDespesa(String id, BuildContext context) async {
+    try {
+      await FirebaseFirestore.instance.collection('despesas').doc(id).delete();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Despesa deletada com sucesso')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao deletar: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +58,18 @@ class ListScreen extends StatelessWidget {
               return ListTile(
                 title: Text(despesa.descricao),
                 subtitle: Text('${despesa.categoria} • ${_formatarData(despesa.data)}'),
-                trailing: Text(
-                  'R\$ ${despesa.valor.toStringAsFixed(2)}',
-                  style: const TextStyle(color: Colors.redAccent),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'R\$ ${despesa.valor.toStringAsFixed(2)}',
+                      style: const TextStyle(color: Colors.redAccent),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.grey),
+                      onPressed: () => _deletarDespesa(despesa.id!, context),
+                    ),
+                  ],
                 ),
               );
             },

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:meu_din_din/screens/financial_goals_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/list_screen.dart';
 import 'screens/add_expense_screen.dart';
-import 'screens/report_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 
@@ -43,7 +43,7 @@ class MeuDinDinApp extends StatelessWidget {
         '/': (context) => const HomeScreen(),
         '/list': (context) => const ListScreen(),
         '/add': (context) => const AddExpenseScreen(),
-        '/report': (context) => const ReportScreen(),
+        '/goal': (context) => const FinancialGoalsScreen(),
       },
     );
   }

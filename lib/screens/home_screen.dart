@@ -86,8 +86,8 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ElevatedButton.icon(
                       icon: const Icon(Icons.bar_chart),
-                      label: const Text('Relatório'),
-                      onPressed: () => Navigator.pushNamed(context, '/report'),
+                      label: const Text('Metas'),
+                      onPressed: () => Navigator.pushNamed(context, '/goal'),
                     ),
                   ],
                 )
